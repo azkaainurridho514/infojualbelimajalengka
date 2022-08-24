@@ -134,27 +134,16 @@
             <button type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
           <div class="carousel-inner">
-            <div class="carousel-item  img-coursel active">
+            <?php $latestProducts = $product->take(3)->get(); ?>
+            @foreach($latestProducts as $latest)
+            <div class="carousel-item  img-coursel latest-1">
               <img src="{{ asset('img/badminton-1.jpg') }}" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h5>First slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
+                <h5>{{ $latest->name }}</h5>
+                <p>{{ $latest->excerpt }}</p>
               </div>
             </div>
-            <div class="carousel-item  img-coursel">
-              <img src="{{ asset('img/badminton-2.jpg') }}" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
-              </div>
-            </div>
-            <div class="carousel-item  img-coursel">
-              <img src="{{ asset('img/badminton-3.jpg') }}" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
-              </div>
-            </div>
+            @endforeach
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -172,21 +161,27 @@
           <h3 class="fs-4 latest-post title-header d-flex align-items-center justify-content-evenly"><i class="bi bi-list-ul" style="color: #fff;font-size: 25px;"></i>  All Post</h3>
         </div>
         <div class="row content d-flex justify-content-center">
-          @for($i = 0; $i < 9; $i++)
+          @foreach($products as $p)
           <div class="col-lg-4 mb-2">
             <div class="card bg-dark text-white">
               <img src="{{ asset('img/badminton-3.jpg') }}" class="card-img" alt="...">
               <div class="card-img-overlay d-flex flex-column justify-content-center">
-                <p class="card-text fs-5">This is a wider card with supporting text</p>
-                <p class="card-text" style="font-size: 13px;">Last updated 3 mins ago</p>
+                <p class="card-text fs-5">{{ $p->name }}</p>
+                <?php $date = explode(' ', $p->created_at) ?>
+                <p class="card-text" style="font-size: 13px;">{{ date('d F Y', strtotime($date[0])) }}</p>
                 <div class="d-flex justify-content-evenly align-items-center">
                   <a href="" class="badge bg-primary text-decoration-none" style="letter-spacing: 1px; color: #fff; font-weight: normal; font-size: 15px;">Selengkapnya....</a>
-                  <button class="badge bg-warning border-0"><i class="bi bi-eye" style="color: #fff;font-size: 21px;"></i></button>
+                  <button class="badge bg-warning border-0 showDetail" data-id="{{ $p->id }}"><i class="bi bi-eye" style="color: #fff;font-size: 21px;"></i></button>
                 </div>
               </div>
             </div>
           </div>
-          @endfor
+          @endforeach
+        </div>
+        <div class="row">
+          <div class="col-lg-6 mx-auto d-flex justify-content-center">
+            {{ $products->links() }}
+          </div>
         </div>
        {{-- end All Post --}}
      </div>
@@ -199,31 +194,15 @@
        <div class="row">
            <div class="col">
 
+            <?php $right = $product->skip(3)->take(4)->get();  ?>
+            @foreach($right as $r)
              <a href="" class="text-decoration-none">
                <div class="card d-flex flex-row align-items-center p-1 gap-1 mt-1 card-lainya">
                  <img src="{{ asset('img/badminton-2.jpg') }}" class="img-thumbnail img-lainya">
-                 <h4 class="fs-6">This is title of first post</h4>
+                 <h4 class="fs-6">{{ $r->name }}</h4>
                </div>
              </a>
-             <a href="" class="text-decoration-none">
-               <div class="card d-flex flex-row align-items-center p-1 gap-1 mt-1 card-lainya">
-                 <img src="{{ asset('img/badminton-2.jpg') }}" class="img-thumbnail img-lainya">
-                 <h4 class="fs-6">This is title of second post</h4>
-               </div>
-             </a>
-             <a href="" class="text-decoration-none">
-               <div class="card d-flex flex-row align-items-center p-1 gap-1 mt-1 card-lainya">
-                 <img src="{{ asset('img/badminton-2.jpg') }}" class="img-thumbnail img-lainya">
-                 <h4 class="fs-6">This is title of third post</h4>
-               </div>
-             </a>
-             <a href="" class="text-decoration-none">
-               <div class="card d-flex flex-row align-items-center p-1 gap-1 mt-1 card-lainya">
-                 <img src="{{ asset('img/badminton-2.jpg') }}" class="img-thumbnail img-lainya">
-                 <h4 class="fs-6">This is title of fourth post</h4>
-               </div>
-             </a>
-
+             @endforeach
            </div>
        </div>
        <div class="header-latest-post">
@@ -232,13 +211,11 @@
        <div class="row">
          <div class="col">
            <ul class="d-flex flex-column table-kategori">
-             <a href="" class="text-decoration-none"><li class="list-kategori">Lahan</li></a>
-             <a href="" class="text-decoration-none"><li class="list-kategori">Rumah</li></a>
-             <a href="" class="text-decoration-none"><li class="list-kategori">Kontrakan</li></a>
-             <a href="" class="text-decoration-none"><li class="list-kategori">Kos - Kosan</li></a>
-             <a href="" class="text-decoration-none"><li class="list-kategori">Mobil</li></a>
-             <a href="" class="text-decoration-none"><li class="list-kategori">Motor</li></a>
-             <a href="" class="text-decoration-none"><li class="list-kategori">Lainya</li></a>
+
+             @foreach($categories as $category)
+             <a href="" class="text-decoration-none"><li class="list-kategori">{{ $category->name }}</li></a>
+             @endforeach
+
            </ul>
          </div>
        </div>
@@ -248,6 +225,14 @@
 </div>
 
 {{-- End Layout --}}
+
+
+
+{{-- modal --}}
+<div class="modal"></div>
+{{-- end modal --}}
+
+
 
 {{-- footer --}}
 
@@ -288,6 +273,67 @@
 
 {{-- end footer --}}
 
+<script src="{{ asset('js/jquery.js') }}"></script>
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+                // run
+        $('.showDetail').on('click', function(){
+            const id = $(this).data('id')
+            detail(id)
+          })
+          // end run
+
+      // add class to first element on carousel
+      $(".latest-1").first().addClass("active")
+      // get data from home controller 
+      function getData(_url, data, html){
+        $.ajax({method: "GET", url: _url, data: data})
+          .done(function(res){
+            html.append(res)
+          })
+          .fail(function(err){
+            alert('ERROR')
+          });
+      }
+      // get detail data from controller
+      function detail(id){
+        $.get(`detail/${id}`)
+          .done(function(res){
+            $('.modal').html(`
+                          <div class="modal fade" id="modalDetail" tabindex="-1" aria-labelledby="modalDetailLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="modalDetailLabel">`+ res.name +`</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    `+ res.body +`
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            `);
+            $('.modal').modal('show')
+          })
+          .fail(function(err){
+            alert("ERROR!")
+          });
+
+
+
+
+      }
+
+      
+
+    })
+  </script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
