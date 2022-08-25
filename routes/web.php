@@ -15,5 +15,19 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('home.detail');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/category-all/{slug}', 'category');
+    Route::get('/product/{slug}', 'product');
+    Route::post('/search', 'search');
+    
+    // ajax
+    Route::get('/category', 'getCategory')->name('category');
+    Route::get('/detail/{id}', 'detailProduct');
+    Route::get('/data', 'data')->name('data');
+});
+
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'index')->name('login.view');
+    Route::post('/login', 'auth')->name('login.auth');
+});

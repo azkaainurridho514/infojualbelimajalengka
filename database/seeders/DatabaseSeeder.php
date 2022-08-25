@@ -16,31 +16,40 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-      // User::create([
-      //   'name' => 'azka ainuridho',
-      //   'email' => 'azkaainurridho514@gmail.com',
-      //   'password' => bcrypt('azkaazka'),
-      //   'remember_token' => 0
-      // ]);
+      User::create([
+        'name' => 'azka ainuridho',
+        'email' => 'azkaainurridho514@gmail.com',
+        'password' => bcrypt('azkaazka'),
+        'remember_token' => 0
+      ]);
 
-      // Categories::create([ 'name' => 'Rumah']);
-      // Categories::create([ 'name' => 'Mobil']);
-      // Categories::create([ 'name' => 'Lahan']);
+      Categories::create([
+       'name' => 'Rumah',
+       'slug' => 'rumah'
+     ]);
+      Categories::create([ 
+        'name' => 'Mobil',
+        'slug' => 'mobil'
+      ]);
+      Categories::create([ 
+        'name' => 'Lahan',
+        'slug' => 'lahan'
+      ]);
 
-      // Categories_childs::create([
-      //   'category_id' => 1,
-      //   'name' => 'Majalengka'
-      // ]);
+      Categories_childs::create([
+        'category_id' => 1,
+        'name' => 'Majalengka'
+      ]);
 
-      // Categories_childs::create([
-      //   'category_id' => 2,
-      //   'name' => 'Avanza'
-      // ]);
+      Categories_childs::create([
+        'category_id' => 2,
+        'name' => 'Avanza'
+      ]);
 
-      // Categories_childs::create([
-      //   'category_id' => 3,
-      //   'name' => 'Majalengka'
-      // ]);
+      Categories_childs::create([
+        'category_id' => 3,
+        'name' => 'Majalengka'
+      ]);
       Products::factory(20)->create();
     }
 }
