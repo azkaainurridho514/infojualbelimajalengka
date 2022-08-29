@@ -157,7 +157,7 @@
 
       // get data from home controller 
       function getData(_url, data, html){
-        $.ajax({method: "GET", url: _url, data: data})
+        $.ajax({method: "GET", data: {url: _url, data: data}})
           .done(function(res){
             html.append(res)
           })

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Categories;
 
-class CategoryController extends Controller
+class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,18 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-     return view('dashboard/category');
-    }
-
-    /**
-     * Get all data.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function data()
-    {
-        $result = Categories::latest()->get();
-        return response()->json($result);
+        //
     }
 
     /**

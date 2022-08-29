@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Products;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,15 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/login', 'index')->name('login.view');
-    Route::post('/login', 'auth')->name('login.auth');
+    Route::get('/login', 'index');
+    Route::post('/login', 'auth')->name('login');
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::controller(DashboardController::class)->group(function(){
+        Route::get('/dashboard', 'index');
+    });
+    Route::controller(CategoryController::class)->group(function(){
+        Route::get('/category', 'index');
+    });
 });
