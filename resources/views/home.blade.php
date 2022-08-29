@@ -97,11 +97,6 @@
        <div class="row">
          <div class="col">
            <ul class="d-flex flex-column table-kategori">
-
-             @foreach($categories as $category)
-             <a href="" class="text-decoration-none"><li class="list-kategori">{{ $category->name }}</li></a>
-             @endforeach
-
            </ul>
          </div>
        </div>

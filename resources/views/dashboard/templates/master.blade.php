@@ -12,6 +12,8 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/datatable.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('css/modal.css') }}"> --}}
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -105,8 +107,8 @@
             
             <form class="nav-link" action="{{ url('logout') }}" method="post">
               @csrf
-              <i class=" nav-icon fas fa-sign-out-alt"></i>
-              <button type="submit">Logout</button>
+              <i class="nav-icon fas fa-sign-out-alt"></i>
+              <button type="submit" class="bg-transparent text-light border-0">Logout</button>
             </form>
           </li>
 
@@ -141,5 +143,8 @@
 </div>
 <script src="{{ asset('js/jquery.js') }}"></script>
 <script src="{{ asset('js/adminlte.min.js') }}"></script>
+<script src="{{ asset('js/datatable.js') }}"></script>
+{{-- <script src="{{ asset('js/modal.js') }}"></script> --}}
+@stack('scripts-dashboard')
 </body>
 </html>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Categories;
 
+use DataTables;
+
 class CategoryController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-     return view('dashboard/category');
+     return view('dashboard.category.category');
     }
 
     /**
@@ -24,8 +26,14 @@ class CategoryController extends Controller
      */
     public function data()
     {
-        $result = Categories::latest()->get();
-        return response()->json($result);
+        $data = Categories::latest()->get();
+        return datatables()
+                    ->of($data)
+                    ->addIndexColumn()
+                    ->addColumn('name', function($data){
+                        return $data->name;
+                    }) ->make();
+         
     }
 
     /**

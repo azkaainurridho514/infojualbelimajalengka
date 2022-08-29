@@ -12,8 +12,8 @@ class HomeController extends Controller
     function index(){
         $products = Products::inRandomOrder()->paginate(9);
         $product = Products::latest();
-        $categories = Categories::latest()->get();
-        return view('home', compact("products", "categories", "product"));
+        // $categories = Categories::latest()->get();
+        return view('home', compact("products", "product"));
     }
 
     function data(Request $request){

@@ -24,7 +24,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::post('/search', 'search');
     
     // ajax
-    Route::get('/category', 'getCategory')->name('category');
+    Route::get('/category-get', 'getCategory')->name('category');
     Route::get('/detail/{id}', 'detailProduct');
     Route::get('/data', 'data')->name('data');
 });
@@ -40,5 +40,6 @@ Route::middleware(['auth'])->group(function(){
     });
     Route::controller(CategoryController::class)->group(function(){
         Route::get('/category', 'index');
+        Route::get('/data', 'data')->name('dataCategory');
     });
 });

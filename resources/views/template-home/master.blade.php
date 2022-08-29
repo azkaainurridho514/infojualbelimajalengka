@@ -146,22 +146,6 @@
 
             <script type="text/javascript">
 
-
-            $.ajax({
-              url: '{{ route('data') }}',
-              data:{ data: ' ' },
-              method: "GET"
-            })
-             .done(function(res){
-              console.log(res)
-             })
-             .fail(function(err){
-              console.log(err)
-             })
-
-
-
-
             $.get('{{ route('category') }}')
               .done(function(res){
                 res.forEach((v, i) => {
@@ -169,13 +153,22 @@
                     <li><a class="dropdown-item" href="{{url('/category-all/`+ v.slug +`')}}">`+ v.name +`</a></li>
                     `)
                   $('#category-footer').append(`
-                     <a href="{{ url('/category-all/lainya') }}" class="text-decoration-none"><li class="list-kategori-footer">`+ v.name +`</li></a>
+                     <a href="{{ url('/category-all/`+ v.slug +`') }}" class="text-decoration-none"><li class="list-kategori-footer">`+ v.name +`</li></a>
+                    `)
+                    $('.table-kategori').append(`
+                     <a href="{{ url('/category-all/`+ v.slug +`') }}" class="text-decoration-none"><li class="list-kategori">`+ v.name +`</li></a>
                     `)
                 })
                 $('.category').append(`
                       <li class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="{{ url('/category-all/lainya') }}">Lainya</a></li>
                   `)
+                $('#category-footer').append(`
+                     <a href="{{ url('/category-all/lainya') }}" class="text-decoration-none"><li class="list-kategori-footer">Lainya</li></a>
+                    `)
+                $('.table-kategori').append(`
+                     <a href="{{ url('/category-all/lainya') }}" class="text-decoration-none"><li class="list-kategori">Lainya</li></a>
+                    `)
               })
               .fail(function(err){
 
