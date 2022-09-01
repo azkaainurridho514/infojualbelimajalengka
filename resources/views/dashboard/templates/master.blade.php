@@ -10,10 +10,11 @@
   <!-- Font Awesome -->
   {{-- <link rel="stylesheet" href="{{ asset('css/all.min.css') }}"> --}}
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-  <!-- Theme style -->
+  <!-- Theme style --> 
+  <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/datatable.css') }}">
-  {{-- <link rel="stylesheet" href="{{ asset('css/modal.css') }}"> --}}
+ 
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -142,9 +143,11 @@
   </aside>
 </div>
 <script src="{{ asset('js/jquery.js') }}"></script>
-<script src="{{ asset('js/adminlte.min.js') }}"></script>
+
 <script src="{{ asset('js/datatable.js') }}"></script>
 {{-- <script src="{{ asset('js/modal.js') }}"></script> --}}
 @stack('scripts-dashboard')
+<script src="{{ asset('js/adminlte.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
 </body>
 </html>

@@ -38,8 +38,6 @@ Route::middleware(['auth'])->group(function(){
     Route::controller(DashboardController::class)->group(function(){
         Route::get('/dashboard', 'index');
     });
-    Route::controller(CategoryController::class)->group(function(){
-        Route::get('/category', 'index');
-        Route::get('/data', 'data')->name('dataCategory');
-    });
+        Route::get('/data', [CategoryController::class, 'data'])->name('dataCategory');
+        Route::resource('/category', CategoryController::class);
 });
