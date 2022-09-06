@@ -63,11 +63,11 @@ class CategoryController extends Controller
                     "name" => "required",
                     "slug" => "required"
                      ]);
-        $query = Categories::insert($validate);
-        if($query){
+        $validate['slug'] = str_replace(" ", "-", strtolower($validate['slug']));
+        if(Categories::insert($validate)){
             $res = $request->name;
         }
-        return response()->json($res);
+        return response()->json($validate['slug']);
     }
 
     /**

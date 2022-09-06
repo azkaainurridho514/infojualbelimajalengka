@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,9 @@ Route::middleware(['auth'])->group(function(){
     Route::controller(DashboardController::class)->group(function(){
         Route::get('/dashboard', 'index');
     });
-        Route::get('/data', [CategoryController::class, 'data'])->name('dataCategory');
+        Route::get('/dataCategory', [CategoryController::class, 'data'])->name('dataCategory');
         Route::resource('/category', CategoryController::class);
+
+        Route::get('/dataProduct', [ProductController::class, 'data'])->name('dataProduct');
+        Route::resource('/product', ProductController::class);
 });

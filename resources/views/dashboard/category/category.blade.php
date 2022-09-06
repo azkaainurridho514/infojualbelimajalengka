@@ -28,7 +28,7 @@
 
 
 
- @includeIf('dashboard.category.form')
+ @includeIf('dashboard.form')
   @endsection
 
  @push('scripts-dashboard')
@@ -54,15 +54,23 @@
           })
       })
 
+
       // show form add
       $('#add').on('click', function(){
-          $('#category-modal form')[0].reset()
-          $('#category-modal').modal('show')
+          $('#form-modal form')[0].reset()
+          $('#form-modal').modal('show')
+          $('#form-modal .modal-body').html(`<div class='mb-3'>
+                                                                                  <label for='title' class='form-label'>Post title</label>
+                                                                                  <input type='text' class='form-control' name='name'>
+                                                                                  <input type='hidden' class='form-control' name='id' value='>
+                                                                                </div>
+                                                                      `)
+          $('#form-modal .modal-title').text('Add new Category')
       })
 
 $('#submit').on('click', function(){
-    if($('#category-modal [name=id]').val()){
-     update($('#category-modal [name=id]').val())
+    if($('#form-modal [name=id]').val()){
+     update($('#form-modal [name=id]').val())
     }else{
      add()
     }
@@ -86,22 +94,23 @@ $('#submit').on('click', function(){
               .done( res => {
                alert(res + ' sukses di tambahkan')
                $('#submit').text('Added')
-               $('#category-modal form')[0].reset()
+               $('#form-modal form')[0].reset()
                table.ajax.reload()
               })
               .fail(err => {
                alert('Ada masalah! silahkan hubungi pihak developer')
                $('#submit').text('Added')
-               $('#category-modal form')[0].reset()
+               $('#form-modal form')[0].reset()
           })
      }
      function edit(url, id){
-          $('#category-modal form')[0].reset()
-          $('#category-modal').modal('show')
+          $('#form-modal form')[0].reset()
+          $('#form-modal').modal('show')
+          $('#form-modal .modal-title').text('Edit Category')
           $.get(url)
           .done(res => {
-                $('#category-modal [name=name]').val(res.name)
-                $('#category-modal [name=id]').val(res.id)
+                $('#form-modal [name=name]').val(res.name)
+                $('#form-modal [name=id]').val(res.id)
           })
           .fail(err => {
                alert('error')
@@ -114,12 +123,12 @@ $('#submit').on('click', function(){
                url: `category/${id}`,
                data:{
                     _token:'{{ csrf_token() }}',
-                    name: $('#category-modal [name=name]').val()
+                    name: $('#form-modal [name=name]').val()
                }
           })
           .done(res => {
                alert(res)
-                $('#category-modal').modal('hide')
+                $('#form-modal').modal('hide')
                 table.ajax.reload()
           })
           .fail(err => {
